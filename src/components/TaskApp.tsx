@@ -102,13 +102,13 @@ const TaskApp = () => {
   const completedTasks = tasks.filter(task => task.completed);
 
   return (
-    <div className="max-w-md mx-auto bg-white min-h-screen shadow-xl">
+    <div className="max-w-md mx-auto bg-white min-h-screen shadow-2xl">
       <TaskHeader 
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
       />
       
-      <div className="p-4 space-y-4">
+      <div className="p-6 space-y-6">
         <TaskStats 
           activeTasks={activeTasks.length}
           completedTasks={completedTasks.length}

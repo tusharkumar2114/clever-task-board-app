@@ -10,30 +10,35 @@ interface TaskItemProps {
 
 const TaskItem = ({ task, onToggleTask, onToggleStar }: TaskItemProps) => {
   return (
-    <div className={`bg-white border border-gray-200 rounded-xl p-4 transition-all hover:shadow-md ${
-      task.completed ? 'opacity-75' : ''
+    <div className={`group bg-white border border-gray-100 rounded-2xl p-5 transition-all duration-300 hover:shadow-lg hover:shadow-gray-100/50 hover:-translate-y-1 ${
+      task.completed ? 'opacity-60' : ''
     }`}>
-      <div className="flex items-center space-x-3">
-        <div className="text-2xl">{task.icon}</div>
+      <div className="flex items-center space-x-4">
+        <div className="text-3xl">{task.icon}</div>
         
         <div className="flex-1 min-w-0">
-          <h3 className={`font-medium text-gray-900 ${
+          <h3 className={`font-semibold text-gray-900 text-lg leading-tight ${
             task.completed ? 'line-through text-gray-500' : ''
           }`}>
             {task.title}
           </h3>
           {task.duration && (
-            <p className="text-sm text-gray-500 mt-1">⏰ {task.duration}</p>
+            <div className="flex items-center mt-2 text-sm text-gray-500">
+              <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              {task.duration}
+            </div>
           )}
         </div>
 
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-3">
           <button
             onClick={() => onToggleStar(task.id)}
-            className={`p-2 rounded-full transition-colors ${
+            className={`p-2 rounded-xl transition-all duration-200 ${
               task.starred 
-                ? 'text-yellow-500 hover:text-yellow-600' 
-                : 'text-gray-400 hover:text-gray-500'
+                ? 'text-yellow-500 bg-yellow-50 hover:bg-yellow-100' 
+                : 'text-gray-400 hover:text-yellow-500 hover:bg-yellow-50'
             }`}
           >
             <svg className="w-5 h-5" fill={task.starred ? 'currentColor' : 'none'} stroke="currentColor" viewBox="0 0 24 24">
@@ -43,15 +48,15 @@ const TaskItem = ({ task, onToggleTask, onToggleStar }: TaskItemProps) => {
 
           <button
             onClick={() => onToggleTask(task.id)}
-            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
+            className={`w-7 h-7 rounded-xl border-2 flex items-center justify-center transition-all duration-200 ${
               task.completed
-                ? 'bg-emerald-500 border-emerald-500'
-                : 'border-gray-300 hover:border-emerald-400'
+                ? 'bg-gradient-to-r from-emerald-500 to-green-500 border-emerald-500 shadow-lg shadow-emerald-500/25'
+                : 'border-gray-300 hover:border-emerald-400 hover:bg-emerald-50'
             }`}
           >
             {task.completed && (
               <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
               </svg>
             )}
           </button>
