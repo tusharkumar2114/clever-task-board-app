@@ -1,10 +1,13 @@
 
 import React from 'react';
 import { TaskCategory } from '../types/task';
+import { Trash2, Menu, Search } from 'lucide-react';
 
 interface TaskHeaderProps {
   activeCategory: TaskCategory;
   setActiveCategory: (category: TaskCategory) => void;
+  onClearCompleted: () => void;
+  completedCount: number;
 }
 
 const categories = [
@@ -16,22 +19,29 @@ const categories = [
   { id: 'personal', label: 'Personal', count: 2 }
 ];
 
-const TaskHeader = ({ activeCategory, setActiveCategory }: TaskHeaderProps) => {
+const TaskHeader = ({ activeCategory, setActiveCategory, onClearCompleted, completedCount }: TaskHeaderProps) => {
   return (
     <div className="bg-white border-b border-gray-50 sticky top-0 z-10 backdrop-blur-md bg-white/95">
       <div className="p-6">
         <div className="flex items-center justify-between mb-6">
           <button className="p-3 rounded-xl hover:bg-gray-50 transition-colors">
-            <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            <Menu className="w-6 h-6 text-gray-700" />
           </button>
           <h1 className="text-xl font-bold text-gray-900">Tasks</h1>
-          <button className="p-3 rounded-xl hover:bg-gray-50 transition-colors">
-            <svg className="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </button>
+          <div className="flex items-center space-x-2">
+            {completedCount > 0 && (
+              <button 
+                onClick={onClearCompleted}
+                className="p-3 rounded-xl hover:bg-red-50 transition-colors group"
+                title="Clear completed tasks"
+              >
+                <Trash2 className="w-5 h-5 text-gray-500 group-hover:text-red-500" />
+              </button>
+            )}
+            <button className="p-3 rounded-xl hover:bg-gray-50 transition-colors">
+              <Search className="w-6 h-6 text-gray-700" />
+            </button>
+          </div>
         </div>
 
         <div className="flex space-x-3 overflow-x-auto pb-2 scrollbar-hide">

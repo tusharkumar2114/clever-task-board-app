@@ -9,4 +9,12 @@ export interface Task {
   completed: boolean;
   starred: boolean;
   icon: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface TaskFilters {
+  category: TaskCategory;
+  showCompleted: boolean;
+  searchQuery: string;
 }
